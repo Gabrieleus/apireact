@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react'
+import Meds from './components/Api/Meds'
 
-function App() {
+
+const App = () => {
+
+  const [medics, setmedics] = useState([]);
+
+  const initialUrl = "https://vettapp-9e130-default-rtdb.firebaseio.com/results.json";
+
+  const fetchMedics = (url) => {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => setmedics(data))
+      .catch(error => console.log(error))
+  }
+  useEffect(() => {
+    fetchMedics(initialUrl)
+    return () => {
+      
+    }
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Meds medics={medics} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
