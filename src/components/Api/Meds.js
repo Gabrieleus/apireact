@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import {Table, Accordion, Button} from 'react-bootstrap';
+import {Table, Accordion, Button, Dropdown} from 'react-bootstrap';
 
 
 const Meds = ({ medics = [] }) => {
@@ -8,11 +8,13 @@ const Meds = ({ medics = [] }) => {
         
         <div className="row">
             {medics.map ((item, index) => (
-                    <div key= {index}className="col">
-                            <Accordion defaultActiveKey="1"  variant="success" aria-expanded="false">
-                            <Accordion.Item eventKey="1">
-                                <Accordion.Header ><h3>{item.name}</h3></Accordion.Header>
-                                <Accordion.Body >
+                    <div key= {index}className="">
+                        <br></br>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    {item.name}
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
                                 <Table striped bordered hover size="sm" variant="success">
                                 <thead>
                                     <tr>
@@ -48,9 +50,8 @@ const Meds = ({ medics = [] }) => {
                                 </tr>
                                 </tbody>
                                 </Table>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            </Accordion>
+                                </Dropdown.Menu>
+                                </Dropdown>
                         </div>
                 ))
             }
